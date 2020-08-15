@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+
+    <script type="text/javascript" src="jsPsych/jspsych.js"></script>
+    <script type="text/javascript" src="jsPsych/plugins/jspsych-html-keyboard-response.js"></script>
+    <script type="text/javascript" src="jsPsych/plugins/jspsych-survey-multi-choice.js"></script>
+    <script type="text/javascript" src="jsPsych/plugins/jspsych-survey-text.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="jsPsych/plugins/jspsych-html-slider-response.js"></script>
+    <script type="text/javascript" src="experiment-data/networks.js"></script>
+    <script type="text/javascript" src="experiment-data/functions.js"></script>
+    <script type="text/javascript" src="experiment-data/trials.js"></script>
+    <link href="jsPsych/css/jspsych.css" rel="stylesheet" type="text/css"/>
+
+  </head>
+  <body>
+  </body>
+
+  <script>
+
+    var cum_response = []
+    
+    var ID = window.prompt("Enter your participant ID:")
+
+    var timeline = [introduction, learning, test_instructions, test]
+
+    
+    jsPsych.init({
+	timeline: timeline,
+	on_finish: function() {
+	    $.ajax({
+		type: "POST",
+		url: "/experiment-data",
+		data: jsPsych.data.get().json(),
+		contentType: "application/json"
+	    })
+		.done(function() {
+		    alert("Thank you!")
+		})
+		.fail(function() {
+		    alert("A problem occurred while writing to the database. Please contact the researcher for more information.")
+		})
+	}
+    })
+
+    </script>
+</html>

@@ -1,0 +1,4 @@
+var network = [{X: "A", Y: "B", relation: "causes"},
+	   {X: "A", Y: "C", relation: "prevents"},
+	   {X: "B", Y: "C", relation: "causes"}
+    ]

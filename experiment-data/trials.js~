@@ -1,0 +1,45 @@
+var test_trial = {
+    type: "html-keyboard-response",
+    stimulus: function() {
+	
+	X = jsPsych.timelineVariable('X', true)
+	Y = jsPsych.timelineVariable('Y', true)
+	relation = jsPsych.timelineVariable('relation', true)
+	return network_stim(X, Y, relation)
+    },
+    data: {label: "test"},
+    choices: [70, 74],
+    on_finish: function(data) {
+	
+	var response = data.key_press
+	var valence = jsPsych.timelineVariable('valence', true)
+	
+	if (response == 70 && valence==true) {
+	    
+	    cum_response.push(true)
+	    data.correct = true
+	    
+	}
+	
+	else if (response == 74 && valence==false) {
+	    
+	    cum_response.push(true)
+	    data.correct = true
+	    
+	}
+	
+	else {
+	    
+	    cum_response.push(false)
+	    data.correct = false
+	    
+	}
+    }
+}
+
+var test = {
+    timeline: [test_trial],
+    timeline_variables: network,
+    randomize_order: true
+    
+}

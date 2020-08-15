@@ -1,0 +1,8 @@
+function network_stim(A, B, relation = "causes") {
+
+
+    return A + " " + relation + " " + B;
+
+
+}
+
